@@ -7,7 +7,7 @@ try{
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $quiz = new Quiz();
         $quiz->MaakQuiz(
-            $_POST['naam']
+            $_POST['quiz_naam']
         );
 
         echo "Je onderwerp is gemaakt. Je word nu verzonden naar de Quizvraag pagina";
@@ -31,8 +31,8 @@ try{
 
     <form method="POST">
     <?php if ($message) echo "<p>" . htmlspecialchars($message) . "</p>"; ?>
-        <label for="naam">Onderwerp:</label>
-        <input type="text" name="naam" placeholder="onderwerp" value="<?= htmlspecialchars($_POST['naam'] ?? '')?>" required>
+        <label for="quiz_naam'">Onderwerp:</label>
+        <input type="text" name="quiz_naam'" placeholder="onderwerp" value="<?= htmlspecialchars($_POST['quiz_naam'] ?? '')?>" required>
         <input type="submit" value="Onderwerp aanmaken">
     </form>
     </div>

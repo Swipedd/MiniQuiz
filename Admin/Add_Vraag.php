@@ -8,7 +8,7 @@ try{
         $quiz = new Quiz();
         $quiz->MaakVraag(
             $_POST['quiz_id'],
-            $_POST['naam'],
+            $_POST['quiz_vraag'],
             $_POST['correct_antwoord'],
             $_POST['fout_antwoord'],
             $_POST['fout_antwoord1'],
@@ -32,18 +32,24 @@ try{
 <body>
     <h1>Quizvraag Toevoegen</h1>
     <?php if ($message) echo "<p>" . htmlspecialchars($message) . "</p>"; ?>
-    <form>
-    <label for="naam"> Quizvraag:</label>
-    <input type="text" name="naam" placeholder="vraag" value="<?= htmlspecialchars($_POST['naam'] ?? '')?>" required>
+    <form method="POST">
+    <label for="quiz_vraag">Quizvraag:</label>
+    <input type="text" name="quiz_vraag" placeholder="vraag" value="<?= htmlspecialchars($_POST['quiz_vraag'] ?? '')?>" required>
+    
     <label for="correct_antwoord">Correct Antwoord:</label>
-    <input type="text" name="correct_antwoord" placeholder="correct_antwoord" value="<?= htmlspecialchars($_POST['correct_antwoord'] ?? '')?>" required>
+    <input type="text" name="correct_antwoord" placeholder="correct antwoord" value="<?= htmlspecialchars($_POST['correct_antwoord'] ?? '')?>" required>
+    
     <label for="fout_antwoord">Fout Antwoord 1:</label>
-    <input type="text" name="fout_antwoord" placeholder="fout_antwoord" value="<?= htmlspecialchars($_POST['fout_antwoord'] ?? '')?>" required>
+    <input type="text" name="fout_antwoord" placeholder="fout antwoord" value="<?= htmlspecialchars($_POST['fout_antwoord'] ?? '')?>" required>
+    
     <label for="fout_antwoord1">Fout Antwoord 2:</label>
-    <input type="text" name="fout_antwoord1" placeholder="fout_antwoord1" value="<?= htmlspecialchars($_POST['fout_antwoord1'] ?? '')?>" required>
+    <input type="text" name="fout_antwoord1" placeholder="fout antwoord 1" value="<?= htmlspecialchars($_POST['fout_antwoord1'] ?? '')?>" required>
+    
     <label for="fout_antwoord2">Fout Antwoord 3:</label>
-    <input type="text" name="fout_antwoord2" placeholder="fout_antwoord2" value="<?= htmlspecialchars($_POST['fout_antwoord2'] ?? '')?>" required>
+    <input type="text" name="fout_antwoord2" placeholder="fout antwoord 2" value="<?= htmlspecialchars($_POST['fout_antwoord2'] ?? '')?>" required>
+    
     <input type="submit" value="Vraag aanmaken">
-    </form>
+</form>
+
 </body>
 </html>
