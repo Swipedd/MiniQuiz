@@ -1,0 +1,24 @@
+🧠 Projectidee: Mini Quiz App
+📋 Omschrijving:
+Maak een webapplicatie waar gebruikers een korte quiz kunnen doen. Ze kiezen een quiz, beantwoorden meerkeuzevragen, en krijgen aan het einde hun score te zien.
+
+🛠️ Functionaliteiten:
+Startpagina met keuze uit meerdere quizzen (bijv. "Algemene kennis", "Programmeren", etc.)
+
+Vragenpagina waar gebruikers per vraag 1 van de 4 antwoorden kiezen
+
+Resultaatpagina met hun score en de juiste antwoorden
+
+Admin paneel om quizvragen toe te voegen/verwijderen (optioneel als je extra wilt leren)
+
+💻 Talen en technologie:
+HTML/CSS → Frontend layout en styling
+
+JavaScript → Interactie op de pagina (bijv. "Volgende vraag"-knop)
+
+PHP → Backend logica (verwerking van antwoorden, routering)
+
+MySQL → Opslaan van quizzen en vragen in een database
+
+Python (optioneel) → Gebruik het bijv. om automatisch quizvragen uit een bestand in de database te laden via een script
+
