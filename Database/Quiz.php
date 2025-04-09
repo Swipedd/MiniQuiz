@@ -16,7 +16,7 @@ Class Quiz extends DB{
         $this->run("INSERT INTO quizvragen (quiz_id, naam, correct_antwoord, fout_antwoord, fout_antwoord1, fout_antwoord2)
         VALUES (:quiz_id, :naam, :correct_antwoord, :fout_antwoord, :fout_antwoord1, :fout_antwoord2)", [
             "quiz_id" => $quiz_id,
-            "quiz_vraag" => $quiz_vraag,
+            "naam" => $quiz_vraag,
             "correct_antwoord" => $correct_antwoord,
             "fout_antwoord" => $fout_antwoord,
             "fout_antwoord1" => $fout_antwoord1,

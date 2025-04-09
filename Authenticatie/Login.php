@@ -4,7 +4,7 @@ session_start();
 
 if (isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] == true) {
     if ($_SESSION['functie'] == "Admin") {
-        header('location: ../Admin/Home_admin.php');
+        header('location: ../Admin/Index_Admin.php');
     } 
 }
 
@@ -19,12 +19,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_SESSION['is_logged_in'] = true;
             $_SESSION['email'] = $data['email'];
             $_SESSION['gebruikerid'] = $data['gebruiker_id'];
-            $_SESSION['functie'] = $data['functie']; 
+            $_SESSION['functie'] = $data['functie'];
+            $_SESSION['naam'] = $data['naam']; // Sla de naam op in de sessie
 
             if ($data['functie'] == "gebruiker") {
-                header('Location: ../Home/Home.php');
+                header('Location: ../Home/Index.php');
             } elseif ($data['functie'] == "Admin") {
-                header('Location: ../Admin/Home_admin.php');
+                header('Location: ../Admin/Index_Admin.php');
             } else {
                 $message = "Onbekende rol.";
             }

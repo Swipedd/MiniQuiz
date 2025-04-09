@@ -4,7 +4,7 @@ require "../Database/gebruiker.php";
 $message = "";
 session_start();
 $gebruiker = new Gebruiker();
-$result = $gebruiker->SelectGebruiker($_SESSION['gebruikerid']);
+$result = $gebruiker->SelectGebruiker($_SESSION['gebruiker_id']);
 
 try {
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -16,8 +16,9 @@ try {
             $wachtwoord = $_POST['wachtwoord'];
 
             // Update user information
-            $gebruiker->UpdateGebruiker($_SESSION['gebruikerid'], $wachtwoord);
-            header("location:../Authenticatie/Login.php");
+            $gebruiker->UpdateGebruiker($_SESSION['gebruiker_id'], $wachtwoord);
+            echo "Je wachtwoord word geupdate";
+            header("Refresh:3; url=../Authenticatie/Login.php");
             exit;
         } catch (Exception $e) {
             $message = "Error: " . $e->getMessage();
