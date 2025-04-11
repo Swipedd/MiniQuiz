@@ -14,7 +14,8 @@ session_start();
     <h1>Welkom 
         <?php 
         if (isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] == true) {
-            echo htmlspecialchars($_SESSION['naam']);
+            echo htmlspecialchars($_SESSION['naam'] . ' ' . $_SESSION['achternaam']);
+
         } else {
             echo "Gast";
         }

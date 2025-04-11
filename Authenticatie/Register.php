@@ -20,19 +20,20 @@ try {
     $message = "Error: " . $e->getMessage();
 }
 ?>
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
+    <title>Registreren</title>
     <link rel="stylesheet" href="../Css/Register.css">
 </head>
 <body>
     <div class="container">
-    <?php if ($message) echo "<p>" . htmlspecialchars($message) . "</p>"; ?>
-    
-        <h1>Register</h1>
+        <?php if ($message) echo "<p>" . htmlspecialchars($message) . "</p>"; ?>
+        
+        <h1>Account aanmaken</h1>
         <form method="POST">
             <label for="naam">Naam:</label>
             <input type="text" name="naam" placeholder="naam" value="<?= htmlspecialchars($_POST['naam'] ?? '')?>" required>

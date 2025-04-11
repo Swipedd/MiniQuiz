@@ -5,28 +5,19 @@ class gebruiker extends DB {
 
     // Gebruiker registreren
     public function register($naam, $achternaam, $email, $wachtwoord) {
-        $this->run("INSERT INTO gebruiker (naam, achternaam) VALUES (:naam, :achternaam)", [
+        $this->run("INSERT INTO gebruiker (naam, achternaam, email, wachtwoord, functie) 
+        VALUES (:naam, :achternaam, :email, :wachtwoord, :functie)", [
             "naam" => $naam,
-            "achternaam" => $achternaam
-        ]);
-
-        // Haal laatste ID op
-        $gebruiker_id = $this->pdo->lastInsertId();
-        $hashedwachtwoord = password_hash($wachtwoord, PASSWORD_DEFAULT);
-
-        // voeg dat de gebruiker_id inloggen tabel is toegevoegd
-        return $this->run("INSERT INTO inloggen (gebruiker_id, email, wachtwoord, functie) 
-                           VALUES (:gebruiker_id, :email, :wachtwoord, :functie)", [
-            "gebruiker_id" => $gebruiker_id,
+            "achternaam" => $achternaam,
             "email" => $email,
-            "wachtwoord" => $hashedwachtwoord,
+            "wachtwoord" => password_hash($wachtwoord, PASSWORD_DEFAULT),
             "functie" => "gebruiker"
         ]);
     }
 
     // Gebruiker inloggen
     public function login($email, $wachtwoord) {
-        $gebruiker = $this->run("SELECT * FROM inloggen WHERE email = :email", [
+        $gebruiker = $this->run("SELECT * FROM gebruiker WHERE email = :email", [
             "email" => $email
         ])->fetch();
 
@@ -47,7 +38,7 @@ class gebruiker extends DB {
     // Wachtwoord updaten
     public function UpdateGebruiker($id, $wachtwoord) {
         $hashedWachtwoord = password_hash($wachtwoord, PASSWORD_DEFAULT);
-        return $this->run("UPDATE inloggen SET wachtwoord = :wachtwoord WHERE gebruiker_id = :id", [
+        return $this->run("UPDATE gebruiker SET wachtwoord = :wachtwoord WHERE id = :id", [
             "wachtwoord" => $hashedWachtwoord,
             "id" => $id
         ]);

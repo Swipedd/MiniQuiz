@@ -5,7 +5,8 @@ session_start();
 if (isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] == true) {
     if ($_SESSION['functie'] == "Admin") {
         header('location: ../Admin/Index_Admin.php');
-    } 
+        exit;
+    }
 }
 
 $message = "";
@@ -17,10 +18,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         if ($data) {
             $_SESSION['is_logged_in'] = true;
+            $_SESSION['naam'] = $data['naam'];
+            $_SESSION['achternaam'] = $data['achternaam'];
+
             $_SESSION['email'] = $data['email'];
-            $_SESSION['gebruikerid'] = $data['gebruiker_id'];
+            $_SESSION['gebruikerid'] = $data['id'];
             $_SESSION['functie'] = $data['functie'];
-            $_SESSION['naam'] = $data['naam']; // Sla de naam op in de sessie
 
             if ($data['functie'] == "gebruiker") {
                 header('Location: ../Home/Index.php');
@@ -53,11 +56,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         <h1>Inloggen</h1>
         <form method="POST">
-            <input type="email" name="email" placeholder="email"value="<?= htmlspecialchars($_POST['email'] ?? '')?>" required>
+            <input type="email" name="email" placeholder="email" value="<?= htmlspecialchars($_POST['email'] ?? '')?>" required>
             <input type="password" name="wachtwoord" placeholder="wachtwoord" required>
-            <input type="submit" name="submit" value="inloggen">
+            <input type="submit" name="submit" value="Inloggen">
         </form>
-        <p>Geen account? <a href="../Authenticatie/Register.php">Registreer hier</a></p>
+        <p>Geen account? <a href="Register.php">Registreer hier</a></p>
     </div>
 </body>
 </html>
