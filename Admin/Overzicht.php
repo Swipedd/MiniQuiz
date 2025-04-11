@@ -1,5 +1,9 @@
 <?php
 require "../Database/Quiz.php";
+$quiz = new Quiz();
+
+$quiz_naam = $quiz->HaalQuizNaam($_GET['quiz_id']);
+$quizvragen = $quiz->HaalQuizVragen($_GET['quiz_id']);
 ?>
 
 <!DOCTYPE html>
@@ -7,12 +11,12 @@ require "../Database/Quiz.php";
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Overzicht Vragen</title>
+    <title>Overzicht</title>
 </head>
 <body>
-    <h1>Overzicht vragen</h1>
+    <h1>Overzicht</h1>
     
-    <table class="OverzichtQuiz" border="1">
+    <table class="Overzicht" border="1">
         <tr>
             <th>ID</th>
             <th>Onderwerp</th>
@@ -25,12 +29,10 @@ require "../Database/Quiz.php";
             <th colspan="2">Knoppen</th>
         </tr>
         <?php
-        $quiz = new Quiz();
-        $quizs = $quiz->HaalQuizOp( $_GET['quiz_id'], $_GET['quiz_naam'] );
-        foreach ($quizs as $quiz) {
+        foreach ($quizvragen as $quiz) {
             echo "<tr>";
             echo "<td>" . $quiz['id'] . "</td>";
-            echo "<td>" . $quiz['quiz_naam'] . "</td>";
+            echo "<td>" . $quiz_naam . "</td>"; 
             echo "<td>" . $quiz['quiz_vraag'] . "</td>";
             echo "<td>" . $quiz['correct_antwoord'] . "</td>";
             echo "<td>" . $quiz['fout_antwoord'] . "</td>";
@@ -41,7 +43,6 @@ require "../Database/Quiz.php";
             echo "<td><a class='btn btn-danger' href='Delete.php?id=" . $quiz['id'] . "'>Delete</a></td>";
             echo "</tr>";
         }
-        
         ?>
     </table>
 </body>

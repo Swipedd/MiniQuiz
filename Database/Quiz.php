@@ -10,7 +10,7 @@ class Quiz extends DB {
         return $this->pdo->lastInsertId();
     }
 
-    public function Maakvraag($quiz_id, $quiz_vraag, $correct_antwoord, $fout_antwoord, $fout_antwoord1, $fout_antwoord2){
+    public function MaakVraag($quiz_id, $quiz_vraag, $correct_antwoord, $fout_antwoord, $fout_antwoord1, $fout_antwoord2){
         $this->run("INSERT INTO quizvraag (quiz_id, quiz_vraag, correct_antwoord, fout_antwoord, fout_antwoord1, fout_antwoord2)
         VALUES (:quiz_id, :quiz_vraag, :correct_antwoord, :fout_antwoord, :fout_antwoord1, :fout_antwoord2)", [ 
             "quiz_id" => $quiz_id,
@@ -22,15 +22,17 @@ class Quiz extends DB {
         ]);
     }
 
-    public function HaalQuizOp($quiz_id, $quiz_naam){
+    public function HaalQuizNaam($quiz_id) {
+        return $this->run("SELECT quiz_naam FROM quiznaam WHERE id = :id", [
+            "id" => $quiz_id
+        ])->fetchColumn();
+    }
+
+    public function HaalQuizVragen($quiz_id) {
         return $this->run("SELECT * FROM quizvraag WHERE quiz_id = :quiz_id", [
             "quiz_id" => $quiz_id
         ])->fetchAll(PDO::FETCH_ASSOC);
-
-        return $this->run("SELECT * FROM quiznaam WHERE quiz_naam = :quiz_naam", [
-            "quiz_naam" => $quiz_naam
-        ]);
-    }    
+    }
 
     public function UpdateQuiz($id, $quiz_naam, $quiz_vraag, $correct_antwoord, $fout_antwoord, $fout_antwoord1, $fout_antwoord2){
         $this->run("UPDATE quiznaam SET quiz_naam = :quiz_naam WHERE id = :id", [

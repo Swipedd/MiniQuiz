@@ -8,6 +8,7 @@ try {
         $quiz = new Quiz();
         $quiz->MaakVraag(
             $_POST['quiz_id'],
+            $_POST['quiz_naam'],
             $_POST['quiz_vraag'],
             $_POST['correct_antwoord'],
             $_POST['fout_antwoord'],
@@ -15,7 +16,7 @@ try {
             $_POST['fout_antwoord2']
         );
         echo "Je vraag en antwoorden zijn toegevoegd!";
-        header("refresh:3; url=Overzicht.php?quiz_id=" . $_POST['quiz_id']);
+        header("refresh:3; url=Overzicht.php?quiz_id=" . $_POST['quiz_id'] . $_POST['quiz_naam']);
         exit;
     }
 } catch (Exception $e) {
