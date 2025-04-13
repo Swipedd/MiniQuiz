@@ -8,14 +8,16 @@ $quizvragen = $quiz->HaalQuizVragen($_GET['quiz_id']);
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Overzicht</title>
 </head>
+
 <body>
     <h1>Overzicht</h1>
-    
+
     <table class="Overzicht" border="1">
         <tr>
             <th>ID</th>
@@ -32,7 +34,7 @@ $quizvragen = $quiz->HaalQuizVragen($_GET['quiz_id']);
         foreach ($quizvragen as $quiz) {
             echo "<tr>";
             echo "<td>" . $quiz['id'] . "</td>";
-            echo "<td>" . $quiz_naam . "</td>"; 
+            echo "<td>" . $quiz_naam . "</td>";
             echo "<td>" . $quiz['quiz_vraag'] . "</td>";
             echo "<td>" . $quiz['correct_antwoord'] . "</td>";
             echo "<td>" . $quiz['fout_antwoord'] . "</td>";
@@ -46,4 +48,5 @@ $quizvragen = $quiz->HaalQuizVragen($_GET['quiz_id']);
         ?>
     </table>
 </body>
+
 </html>

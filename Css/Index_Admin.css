@@ -1,0 +1,90 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(to right, #0f2027, #203a43, #2c5364); 
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.container {
+    background-color: #ffffff;
+    padding: 40px 30px;
+    border-radius: 15px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.25);
+    text-align: center;
+    width: 100%;
+    max-width: 500px;
+}
+
+h1 {
+    color: #2c5364;
+    margin-bottom: 20px;
+}
+
+button {
+    background-color: #1a73e8; 
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 16px;
+    margin: 10px 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button a {
+    color: white;
+    text-decoration: none;
+}
+
+button.Onderwerp {
+    background-color: #007bff;
+}
+button.Onderwerp:hover {
+    background-color: #0056b3;
+}
+
+button.Update {
+    background-color: #28a745;
+}
+button.Update:hover {
+    background-color: #218838;
+}
+
+button.Overzicht {
+    background-color: #17a2b8;
+}
+button.Overzicht:hover {
+    background-color: #117a8b;
+}
+
+button.Logout {
+    background-color: #dc3545; 
+}
+button.Logout:hover {
+    background-color: #c82333;
+}
+
+@media (max-width: 500px) {
+    .container {
+        padding: 25px 20px;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+    button {
+        font-size: 14px;
+        padding: 10px 16px;
+    }
+}

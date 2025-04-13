@@ -8,7 +8,6 @@ try {
         $quiz = new Quiz();
         $quiz->MaakVraag(
             $_POST['quiz_id'],
-            $_POST['quiz_naam'],
             $_POST['quiz_vraag'],
             $_POST['correct_antwoord'],
             $_POST['fout_antwoord'],
@@ -25,17 +24,21 @@ try {
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Quizvraag Toevoegen</title>
 </head>
+
 <body>
     <h1>Quizvraag Toevoegen</h1>
     <?php if ($message) echo "<p>" . htmlspecialchars($message) . "</p>"; ?>
-    
+
     <form method="POST">
 
         <input type="hidden" name="quiz_id" value="<?= htmlspecialchars($_GET['quiz_id'] ?? '') ?>" required>
+
+        <input type="hidden" name="quiz_naam" value="<?= htmlspecialchars($_GET['quiz_naam'] ?? '') ?>" required>
 
         <label for="quiz_vraag">Quizvraag:</label>
         <input type="text" name="quiz_vraag" required>
@@ -55,4 +58,5 @@ try {
         <input type="submit" value="Vraag aanmaken">
     </form>
 </body>
+
 </html>
