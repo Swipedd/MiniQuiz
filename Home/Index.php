@@ -29,6 +29,7 @@ session_start();
             // Laat de knop zien als de gebruiker is ingelogd
             echo '<button class ="Begin"><a href="../Quiz/Quiz.php">Start Quiz</a></button>';
             echo '<button class="logout"><a href="../Authenticatie/Login.php">Logout</a></button>';
+            echo '<button class="Profiel"><a href="../Profiel/Profiel.php">Profiel</a></button>';
         } else {
             // Toon login en registratie knoppen als de gebruiker niet ingelogd is
             echo '<p>Je moet eerst inloggen of registreren om de quiz te starten.</p>';
@@ -37,7 +38,7 @@ session_start();
         }
         ?>
         <br>
-        <button><a href="../Meer weten/About.php">Wil je meer weten klik hier op!</a></button>
+        <button class="Contact"><a href="../Contact/Formulier.php">Wil je ons contacteren? Klik hier op!</a></button>
     </div>
 
 </body>

@@ -1,14 +1,6 @@
 <?php
 require "../Database/gebruiker.php";
 session_start();
-
-if (isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] == true) {
-    if ($_SESSION['functie'] == "Admin") {
-        header('location: ../Admin/Index_Admin.php');
-        exit;
-    }
-}
-
 $message = "";
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -20,7 +12,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_SESSION['is_logged_in'] = true;
             $_SESSION['naam'] = $data['naam'];
             $_SESSION['achternaam'] = $data['achternaam'];
-
             $_SESSION['email'] = $data['email'];
             $_SESSION['gebruikerid'] = $data['id'];
             $_SESSION['functie'] = $data['functie'];
@@ -44,23 +35,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <!DOCTYPE html>
 <html lang="nl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" href="../CSS/Login.css"> 
+    <link rel="stylesheet" href="../CSS/Login.css">
 </head>
+
 <body>
     <div class="container">
         <?php if ($message) echo "<p>" . htmlspecialchars($message) . "</p>"; ?>
 
         <h1>Inloggen</h1>
         <form method="POST">
-            <input type="email" name="email" placeholder="email" value="<?= htmlspecialchars($_POST['email'] ?? '')?>" required>
+            <input type="email" name="email" placeholder="email" value="<?= htmlspecialchars($_POST['email'] ?? '') ?>" required>
             <input type="password" name="wachtwoord" placeholder="wachtwoord" required>
             <input type="submit" name="submit" value="Inloggen">
         </form>
         <p>Geen account? <a href="Register.php">Registreer hier</a></p>
     </div>
 </body>
+
 </html>
