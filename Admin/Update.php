@@ -1,69 +1,86 @@
 <?php
 require "../Database/Quiz.php";
-$quiz = new Quiz();
+session_start();
 
-// Haal de quizgegevens op
-if (isset($_GET['id'])) {
-    $quiz_id = $_GET['id'];
-    $quiz_naam = $quiz->HaalQuizNaam($quiz_id);
-    $quiz_vragen = $quiz->HaalQuizVragen($quiz_id);
-} else {
-    echo "Geen quiz ID opgegeven.";
-    exit();
+// Check of quiz_id is meegegeven
+if (!isset($_GET['quiz_id'])) {
+    echo "Geen quiz geselecteerd.";
+    header("refresh:2;url= Overzicht.php");
+    exit;
 }
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+$quiz_id = $_GET['quiz_id'];
+$quiz = new Quiz();
+
+// Haal quiznaam en vragen op
+$quiz_naam = $quiz->HaalQuizNaam($quiz_id);
+$quiz_vragen = $quiz->HaalQuizVragen($quiz_id);
+
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $nieuwe_quiz_naam = htmlspecialchars($_POST['quiz_naam']);
+    $quiz_vraag = htmlspecialchars($_POST['quiz_vraag']);
+    $correct_antwoord = htmlspecialchars($_POST['correct_antwoord']);
+    $fout_antwoord = htmlspecialchars($_POST['fout_antwoord']);
+    $fout_antwoord1 = htmlspecialchars($_POST['fout_antwoord1']);
+    $fout_antwoord2 = htmlspecialchars($_POST['fout_antwoord2']);
+
     try {
-
-        $quiz->UpdateQuiz(
-            $quiz_id,
-            $_POST['quiz_naam'],
-            $_POST['quiz_vraag'],
-            $_POST['correct_antwoord'],
-            $_POST['fout_antwoord'],
-            $_POST['fout_antwoord1'],
-            $_POST['fout_antwoord2']
-        );
-
-        echo "De quiz is succesvol geüpdatet!";
-        header("refresh:2; url= Overzicht.php?quiz_id=" . $quiz_id);
-        exit();
+        $quiz->UpdateQuiz($quiz_id, $nieuwe_quiz_naam, $quiz_vraag, $correct_antwoord, $fout_antwoord, $fout_antwoord1, $fout_antwoord2);
+        echo "Quiz succesvol bijgewerkt!";
+        header("refresh:2;url= Overzicht.php");
+        exit;
     } catch (Exception $e) {
-        echo "Fout bij het updaten van de quiz: " . $e->getMessage();
+        echo "Fout bij bijwerken: " . $e->getMessage();
     }
 }
 ?>
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nl">
 
 <head>
     <meta charset="UTF-8">
-    <title>Update Quiz</title>
+    <title>Quiz Bewerken</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
-<body>
-    <h1>Update Quiz: <?= htmlspecialchars($quiz_naam) ?></h1>
+<body class="container mt-5">
+    <a class='btn btn-danger mb-4' href='../user/user-logout.php'>Logout</a>
+    <h1>Quiz Bewerken</h1>
 
     <form method="POST">
-        <label for="quiz_naam">Quiznaam:</label>
-        <input type="text" name="quiz_naam" value="<?= htmlspecialchars($quiz_naam) ?>" required>
+        <div class="mb-3">
+            <label for="quiz_naam" class="form-label">Quiznaam:</label>
+            <input type="text" class="form-control" name="quiz_naam" value="<?= htmlspecialchars($quiz_naam) ?>" required>
+        </div>
 
-        <label for="quiz_vraag">Quizvraag:</label>
-        <input type="text" name="quiz_vraag" value="<?= htmlspecialchars($quiz_vragen['quiz_vraag']) ?>" required>
+        <div class="mb-3">
+            <label for="quiz_vraag" class="form-label">Quizvraag:</label>
+            <input type="text" class="form-control" name="quiz_vraag" value="<?= htmlspecialchars($eersteVraag['quiz_vraag'] ?? '') ?>" required>
+        </div>
 
-        <label for="correct_antwoord">Correct Antwoord:</label>
-        <input type="text" name="correct_antwoord" value="<?= htmlspecialchars($quiz_vragen['correct_antwoord']) ?>" required>
+        <div class="mb-3">
+            <label for="correct_antwoord" class="form-label">Correct Antwoord:</label>
+            <input type="text" class="form-control" name="correct_antwoord" value="<?= htmlspecialchars($eersteVraag['correct_antwoord'] ?? '') ?>" required>
+        </div>
 
-        <label for="fout_antwoord">Fout Antwoord 1:</label>
-        <input type="text" name="fout_antwoord" value="<?= htmlspecialchars($quiz_vragen['fout_antwoord']) ?>" required>
+        <div class="mb-3">
+            <label for="fout_antwoord" class="form-label">Fout Antwoord 1:</label>
+            <input type="text" class="form-control" name="fout_antwoord" value="<?= htmlspecialchars($eersteVraag['fout_antwoord'] ?? '') ?>" required>
+        </div>
 
-        <label for="fout_antwoord1">Fout Antwoord 2:</label>
-        <input type="text" name="fout_antwoord1" value="<?= htmlspecialchars($quiz_vragen['fout_antwoord1']) ?>" required>
+        <div class="mb-3">
+            <label for="fout_antwoord1" class="form-label">Fout Antwoord 2:</label>
+            <input type="text" class="form-control" name="fout_antwoord1" value="<?= htmlspecialchars($eersteVraag['fout_antwoord1'] ?? '') ?>" required>
+        </div>
 
-        <label for="fout_antwoord2">Fout Antwoord 3:</label>
-        <input type="text" name="fout_antwoord2" value="<?= htmlspecialchars($quiz_vragen['fout_antwoord2']) ?>" required>
+        <div class="mb-3">
+            <label for="fout_antwoord2" class="form-label">Fout Antwoord 3:</label>
+            <input type="text" class="form-control" name="fout_antwoord2" value="<?= htmlspecialchars($eersteVraag['fout_antwoord2'] ?? '') ?>" required>
+        </div>
 
-        <input type="submit" value="Quiz Updaten">
+        <input type="submit" class="btn btn-primary" value="Quiz Updaten">
     </form>
 </body>
 

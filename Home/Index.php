@@ -12,6 +12,8 @@ session_start();
 </head>
 
 <body>
+
+
     <div class="container">
         <h1>Welkom
             <?php
