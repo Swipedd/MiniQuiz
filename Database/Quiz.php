@@ -67,4 +67,11 @@ class Quiz extends DB
             "id" => $id
         ]);
     }
+
+    public function HaalQuizIdOpNaam($quiz_naam)
+    {
+        return $this->run("SELECT id FROM quiznaam WHERE quiz_naam = :quiz_naam", [
+            "quiz_naam" => $quiz_naam
+        ])->fetchColumn();
+    }
 }

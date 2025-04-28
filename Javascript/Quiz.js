@@ -21,5 +21,5 @@ function msg() {
 
   function buttonVraag(){
     msg3();
-    window.location.href = "Vraag.php";
+    window.location.href = "Rekenen.php"
   }
